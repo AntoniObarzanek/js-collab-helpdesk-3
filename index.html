@@ -7,26 +7,29 @@
 </head>
 <body>
     <form action="">
-        <input type="text" name="title">
-        <select name="" id="">
+        <input type="text" name="title" id="title">
+        <select name="" id="priority">
             <option value="low">low</option>
             <option value="normal">normal</option>
             <option value="high">high</option>
         </select>
         
-    </form>
-    <input id="all" name="all" type="checkbox" checked>
-    <label for="all">all</label>
+        
 
-    <input id="new" type="checkbox">
+    <input type="submit" id="submitbtn">
+</form>
+<input id="all" name="all" type="checkbox" checked>
+        <label for="all">all</label>
+        
+        <input id="new" type="checkbox">
     <label for="new">new</label>
 
     <input id="doing" name="doing" type="checkbox">
     <label for="doing">doing</label>
-
+    
     <input id="done" name="done" type="checkbox">
     <label for="done">done</label>
-
+<div class="errorContainer" id="errorContainer"></div>    
     <div class="lista" id="lista">
     </div>
     <div class="komunikat" id="komunikat">

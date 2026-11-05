@@ -1,3 +1,6 @@
+const listDom = document.getElementById("lista")
+const submitBtn = document.getElementById("submitbtn")
+
 const tasks = [
     {
         id: "1",
@@ -19,9 +22,7 @@ const tasks = [
     },
 ]
 
-
 const renderTasks = (tasks)=>{
-    const listDom = document.getElementById("lista")
     tasks.forEach(elem => {
     const li = document.createElement("li")
     li.innerHTML = `
@@ -33,8 +34,6 @@ const renderTasks = (tasks)=>{
     listDom.appendChild(li)
     }); 
 }
-
-renderTasks(tasks)
 
 const addTask = (title,priority)=>{
      if (!title || title.trim() === "") { 
@@ -55,5 +54,38 @@ const addTask = (title,priority)=>{
     }
 
     tasks.push(newTask)
+    listDom.innerHTML = ""
     renderTasks(tasks)
 }
+
+renderTasks(tasks)
+
+
+submitBtn.addEventListener("click",(e)=>{
+    e.preventDefault()
+    console.log("submit clicked");
+    const title = document.getElementById("title").value
+    const priority = document.getElementById("priority").value
+    const errorContainer = document.getElementById("errorContainer")
+
+    if(errorContainer){
+        errorContainer.textContent = ""
+    }
+
+    try{
+        if (!title || title.trim() === "") {
+            throw new Error("Wpisz tytuł zadania!");
+        }
+
+        if (!priority || priority === "") {
+            throw new Error("Wybierz poprawny priorytet z listy!");
+        }
+        addTask(title,priority)
+        document.getElementById("title").value = ""
+    }
+    catch(err){
+        console.error("Error:", err.message);
+        errorContainer.textContent = err.message;
+        errorContainer.style.color = "red";
+    }
+})
