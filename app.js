@@ -26,13 +26,19 @@ const tasks = [
 const renderTasks = (tasks)=>{
     tasks.forEach(elem => {
     const li = document.createElement("li")
+    // <p>ID: ${elem.id}</p>
     li.innerHTML = `
-        <p>${elem.id}</p>
-        <p>${elem.title}</p>
-        <p>${elem.status}</p>
-        <p>${elem.priority}</p>
+        <p>Zadanie: ${elem.title}</p>
+        <p>Priorytet: ${elem.priority}</p>
+        <label for="status-${elem.id}">Status: </label>
+        <select class="status-select" data-id="${elem.id}" id="status-${elem.id}">
+            <option value="new" ${elem.status === 'new' ? 'selected' : ''}>New</option>
+            <option value="doing" ${elem.status === 'doing' ? 'selected' : ''}>Doing</option>
+            <option value="done" ${elem.status === 'done' ? 'selected' : ''}>Done</option>
+        </select>
     `
     listDom.appendChild(li)
+    statusHandlers()
     }); 
 }
 
@@ -59,7 +65,28 @@ const addTask = (title,priority)=>{
     renderTasks(tasks)
 }
 
-renderTasks(tasks)
+const statusHandlers = () => {
+    const statusSelects = document.querySelectorAll(".status-select");
+
+    statusSelects.forEach(select => {
+        select.addEventListener("change", (e) => {
+            const taskId = e.target.getAttribute("data-id");
+            const newStatus = e.target.value;
+            changeStatus(taskId, newStatus);
+        });
+    });
+};
+
+const changeStatus = (id,newStatus)=>{
+    const task = tasks.find(task=>task.id===id)
+
+    if(!task){
+        console.error("NO such status")
+    }
+    
+    task.status = newStatus
+    filter()
+}
 
 function filter() {
     const all = document.getElementById("all").checked;
@@ -78,14 +105,25 @@ function filter() {
     renderTasks(filteredTasks);
 }
 
+renderTasks(tasks)
+
 filterCheckboxes.forEach(checkbox => {
     checkbox.addEventListener("change", (e) => {
+        const isNew = document.getElementById("new");
+        const doing = document.getElementById("doing");
+        const done = document.getElementById("done");
+        const all = document.getElementById("all");
+
         if (e.target.id === "all" && e.target.checked) {
-            document.getElementById("new").checked = false;
-            document.getElementById("doing").checked = false;
-            document.getElementById("done").checked = false;
+            isNew.checked = false;
+            doing.checked = false;
+            done.checked = false;
         } else if (e.target.checked) {
-            document.getElementById("all").checked = false;
+            all.checked = false;
+        }
+
+        if (!isNew.checked && !doing.checked && !done.checked) {
+            all.checked = true;
         }
         filter();
     });
