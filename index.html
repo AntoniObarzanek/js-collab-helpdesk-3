@@ -19,17 +19,13 @@
 
     <input type="submit" id="submitbtn">
 </form>
-<input id="all" name="all" type="checkbox" checked>
-        <label for="all">all</label>
-        
-        <input id="new" type="checkbox">
-    <label for="new">new</label>
-
-    <input id="doing" name="doing" type="checkbox">
-    <label for="doing">doing</label>
-    
-    <input id="done" name="done" type="checkbox">
-    <label for="done">done</label>
+<div class="filters-container">
+    <span>Filtry:</span>
+    <label><input id="all" type="checkbox" checked> All</label>
+    <label><input id="new" type="checkbox"> New</label>
+    <label><input id="doing" type="checkbox"> Doing</label>
+    <label><input id="done" type="checkbox"> Done</label>
+</div>
 <div class="errorContainer" id="errorContainer"></div>    
     <div class="lista" id="lista">
     </div>
