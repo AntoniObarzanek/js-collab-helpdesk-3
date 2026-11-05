@@ -35,3 +35,25 @@ const renderTasks = (tasks)=>{
 }
 
 renderTasks(tasks)
+
+const addTask = (title,priority)=>{
+     if (!title || title.trim() === "") { 
+        console.error("Title cant be empty");
+        return;
+    }
+
+    if (tasks.length >= 1000) {
+        console.error("You cant add more than 1000 tasks");
+        return;
+    }
+
+    const newTask = {
+        id: Date.now().toString(),
+        title,
+        status: "new",
+        priority
+    }
+
+    tasks.push(newTask)
+    renderTasks(tasks)
+}
