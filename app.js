@@ -1,5 +1,6 @@
 const listDom = document.getElementById("lista")
 const submitBtn = document.getElementById("submitbtn")
+const filterCheckboxes = document.querySelectorAll('input[type="checkbox"]');       
 
 const tasks = [
     {
@@ -76,6 +77,19 @@ function filter() {
     document.getElementById("lista").innerHTML = "";
     renderTasks(filteredTasks);
 }
+
+filterCheckboxes.forEach(checkbox => {
+    checkbox.addEventListener("change", (e) => {
+        if (e.target.id === "all" && e.target.checked) {
+            document.getElementById("new").checked = false;
+            document.getElementById("doing").checked = false;
+            document.getElementById("done").checked = false;
+        } else if (e.target.checked) {
+            document.getElementById("all").checked = false;
+        }
+        filter();
+    });
+});
 
 
 submitBtn.addEventListener("click",(e)=>{
