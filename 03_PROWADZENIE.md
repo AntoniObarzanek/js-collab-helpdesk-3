@@ -52,7 +52,7 @@ W trójce:
 - Tekst `<b>ABC</b>` pozostaje tekstem.
 
 ## 4. Dodawanie
-- W `submit` najpierw `preventDefault()`, potem odczyt, walidacja i nowy stan.
+- W `submit` najpierw `preventDefault()`x, potem odczyt, walidacja i nowy stan.
 - Czyśćcie pole tylko po sukcesie.
 
 **Sprawdźcie:** 
