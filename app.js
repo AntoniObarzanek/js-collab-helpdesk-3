@@ -35,3 +35,14 @@ const renderTasks = (tasks)=>{
 }
 
 renderTasks(tasks)
+
+const addTask = (title,priority)=>{
+    const newTask = {
+        id: Date.now().toString(),
+        title: title,
+        status: "new",
+        priority: priority
+    }
+
+    tasks.push(newTask)
+}
