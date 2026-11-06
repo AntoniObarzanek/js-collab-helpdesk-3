@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #f5f5f5;
     padding: 30px;
     color: #333;
@@ -16,9 +16,19 @@ body {
 
 form {
     display: flex;
-    gap: 8px;
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 24px;
+    border: 1px solid #ddd;
 }
+
+form, .filters-container {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+
+}   
 
 input, select {
     padding: 7px;
@@ -26,9 +36,28 @@ input, select {
     border-radius: 4px;
 }
 
+
 input[type="text"] {
     width: 200px;
+    flex-grow: 1;
 }
+
+input[type="text"], select {
+    padding: 10px 14px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #1a1a1a;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+input[type="text"]:focus, 
+select:focus {
+    border-color: #a3a3a3;
+}
+
 
 input[type="checkbox"] {
     accent-color: #333;
@@ -40,26 +69,168 @@ body > label {
     font-size: 13px;
 }
 
+/* .filters-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.filters-container span {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.filters-container label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+}
+
+input[type="checkbox"] {
+    accent-color: #1a1a1a;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+} */
+
+
+
+.filters-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 14px;
+    color: #1a1a1a;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.filters-container span {
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-right: 4px;
+}
+
+.filters-container label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.filters-container label:hover {
+    border-color: #a3a3a3;
+    background-color: #fafafa;
+}
+
 #lista {
     margin-top: 15px;
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 #lista li {
     display: flex;
-    gap: 20px;
-    padding: 10px;
+    flex-direction: column; 
+    gap: 12px;
+    padding: 16px 20px;
     background: white;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+#lista li p:nth-child(1) {
+    font-size: 15px;
+    font-weight: 500;
+    flex: 1;
+    word-break: break-word;
+    min-width: 150px;
 }
 
 #lista li p:nth-child(2) {
+    font-size: .7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+    background: #f5f5f5;
+    padding: 4px 8px;
+    border-radius: 4px;
     width: 130px;
     font-weight: bold;
 }
 
+#lista li label {
+    font-size: 13px;
+    color: #666;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#lista li .status-select {
+    padding: 6px 10px;
+    font-size: 13px;
+    background-color: #fafafa;
+}
+
+.errorContainer, 
 #komunikat {
     margin-top: 12px;
     font-size: 13px;
     color: #666;
 }
+
+.errorContainer {
+    color: #de3b3b;
+}
+
+#submitbtn {
+    padding: 10px 20px;
+    background-color: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+#submitbtn:hover {
+    background-color: #333333;
+}
+
+
+/* .filters-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+input[type="checkbox"] {
+    accent-color: #2563eb;      
+    cursor: pointer;
+    transform: scale(1.1);
+    margin-right: 4px;
+} */
+

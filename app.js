@@ -23,10 +23,9 @@ const tasks = [
     },
 ]
 
-const renderTasks = (tasks)=>{
-    tasks.forEach(elem => {
+const renderTasks = (tasksRender)=>{
+    tasksRender.forEach(elem => {
     const li = document.createElement("li")
-    // <p>ID: ${elem.id}</p>
     li.innerHTML = `
         <p>Zadanie: ${elem.title}</p>
         <p>Priorytet: ${elem.priority}</p>
@@ -38,8 +37,26 @@ const renderTasks = (tasks)=>{
         </select>
     `
     listDom.appendChild(li)
-    statusHandlers()
-    }); 
+}); 
+statusHandlers()
+visibleTasks(tasksRender,tasks)
+}
+
+function filtering() {
+    const all = document.getElementById("all").checked;
+    const isNew = document.getElementById("new").checked;
+    const doing = document.getElementById("doing").checked;
+    const done = document.getElementById("done").checked;
+
+    const filteredTasks = tasks.filter(task => {
+        if (all) return true;
+        if (task.status === "new" && isNew) return true;
+        if (task.status === "doing" && doing) return true;
+        if (task.status === "done" && done) return true;
+        return false;
+    });
+    document.getElementById("lista").innerHTML = "";
+    renderTasks(filteredTasks);
 }
 
 const addTask = (title,priority)=>{
@@ -62,7 +79,18 @@ const addTask = (title,priority)=>{
 
     tasks.push(newTask)
     listDom.innerHTML = ""
-    renderTasks(tasks)
+    filtering()
+}
+
+const changeStatus = (id,newStatus)=>{
+    const task = tasks.find(task=>task.id===id)
+
+    if(!task){
+        console.error("NO such status")
+    }
+    
+    task.status = newStatus
+    filtering()
 }
 
 const statusHandlers = () => {
@@ -77,35 +105,16 @@ const statusHandlers = () => {
     });
 };
 
-const changeStatus = (id,newStatus)=>{
-    const task = tasks.find(task=>task.id===id)
-
-    if(!task){
-        console.error("NO such status")
+const visibleTasks = (visible,tasks)=>{
+    const komunikat = document.getElementById("ilosc")
+    if(visible.length===0){
+        komunikat.innerText = "Brak pasujacych rekordow"
     }
-    
-    task.status = newStatus
-    filter()
+    else{
+        komunikat.innerText = `Wyswietlono ${visible.length} z ${tasks.length} rekordow`
+    }
 }
 
-function filter() {
-    const all = document.getElementById("all").checked;
-    const isNew = document.getElementById("new").checked;
-    const doing = document.getElementById("doing").checked;
-    const done = document.getElementById("done").checked;
-
-    const filteredTasks = tasks.filter(task => {
-        if (all) return true;
-        if (task.status === "new" && isNew) return true;
-        if (task.status === "doing" && doing) return true;
-        if (task.status === "done" && done) return true;
-        return false;
-    });
-    document.getElementById("lista").innerHTML = "";
-    renderTasks(filteredTasks);
-}
-
-renderTasks(tasks)
 
 filterCheckboxes.forEach(checkbox => {
     checkbox.addEventListener("change", (e) => {
@@ -125,10 +134,9 @@ filterCheckboxes.forEach(checkbox => {
         if (!isNew.checked && !doing.checked && !done.checked) {
             all.checked = true;
         }
-        filter();
+        filtering();
     });
 });
-
 
 submitBtn.addEventListener("click",(e)=>{
     e.preventDefault()
@@ -136,11 +144,11 @@ submitBtn.addEventListener("click",(e)=>{
     const title = document.getElementById("title").value
     const priority = document.getElementById("priority").value
     const errorContainer = document.getElementById("errorContainer")
-
+    
     if(errorContainer){
         errorContainer.textContent = ""
     }
-
+    
     try{
         if (!title || title.trim() === "") {
             throw new Error("Wpisz tytuł zadania!");
@@ -161,3 +169,5 @@ submitBtn.addEventListener("click",(e)=>{
         errorContainer.style.color = "red";
     }
 })
+
+filtering()
