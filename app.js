@@ -149,6 +149,9 @@ submitBtn.addEventListener("click",(e)=>{
         if (!priority || priority === "") {
             throw new Error("Wybierz poprawny priorytet z listy!");
         }
+        if(title.trim().length<3 || title.trim().length>80){
+            throw new Error("Tytuł musi miec od 3 do 80 znaków!")
+        }
         addTask(title,priority)
         document.getElementById("title").value = ""
     }
